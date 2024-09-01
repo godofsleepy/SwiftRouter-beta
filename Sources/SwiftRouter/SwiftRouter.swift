@@ -97,7 +97,8 @@ public class Router: ObservableObject{
         }
     }
     
-    public func pushReplace(_ path: String) {
+    public func pushReplace(_ id: UUID,_ path: String) {
+        sync(id: id)
         let route = Route(path: path)
         if self.path.count == 1 {
             self.rootView = route
