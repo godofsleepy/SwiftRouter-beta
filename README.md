@@ -124,4 +124,5 @@ As this package is still in development, we welcome suggestions and feedback. Fe
 
 
 # Contact
-
+- [Twitter](https://x.com/godofsleepy)
+- [LinkedIn](https://www.linkedin.com/in/godofsleepy/)
