@@ -3,22 +3,22 @@
 import Foundation
 import SwiftUI
 
-struct Route: Hashable, Identifiable {
-    let id = UUID()
+public struct Route: Hashable, Identifiable {
+    public let id = UUID()
     let path: String
     let param: [String: AnyHashable?]?
     
-    init(path: String, param: [String : AnyHashable?]?) {
+    public init(path: String, param: [String : AnyHashable?]?) {
         self.path = path
         self.param = param
     }
     
-    init(path: String) {
+    public init(path: String) {
         self.path = path
         self.param = nil
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(path)
         param?.forEach { key, value in
@@ -27,14 +27,14 @@ struct Route: Hashable, Identifiable {
         }
     }
 
-    static func ==(lhs: Route, rhs: Route) -> Bool {
+    public static func ==(lhs: Route, rhs: Route) -> Bool {
         return lhs.id == rhs.id &&
                lhs.path == rhs.path &&
                lhs.param == rhs.param
     }
 }
 
-class Router: ObservableObject{
+public class Router: ObservableObject{
     @Published fileprivate var path: [Route] = []
     @Published fileprivate var rootView: Route? = nil
     private var completions: [(id: UUID, completion: Any?)] = []
@@ -129,18 +129,18 @@ class Router: ObservableObject{
     
 }
 
-struct NavigationRouter<Content: View>: View {
+public struct NavigationRouter<Content: View>: View {
     @StateObject private var router = Router()
     
     var destination: (Route) -> Content
     var rootPath: Route
     
-    init(rootPath: Route, @ViewBuilder destination: @escaping (Route) -> Content) {
+    public init(rootPath: Route, @ViewBuilder destination: @escaping (Route) -> Content) {
         self.destination = destination
         self.rootPath = rootPath
     }
     
-    var body: some View {
+    public var body: some View {
         Group {
             NavigationStack(path: $router.path){
                 EmptyView()
