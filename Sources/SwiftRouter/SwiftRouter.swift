@@ -5,8 +5,8 @@ import SwiftUI
 
 public struct Route: Hashable, Identifiable {
     public let id = UUID()
-    let path: String
-    let param: [String: AnyHashable?]?
+    public let path: String
+    public let param: [String: AnyHashable?]?
     
     public init(path: String, param: [String : AnyHashable?]?) {
         self.path = path
@@ -47,12 +47,12 @@ public class Router: ObservableObject{
         self.path = [rootView]
     }
     
-    func push(_ id: UUID, _ path: String, param: [String: AnyHashable?]? = nil) {
+    public func push(_ id: UUID, _ path: String, param: [String: AnyHashable?]? = nil) {
         sync(id: id)
         self.path.append(Route(path: path, param: param))
     }
     
-    func push(
+    public func push(
         _ id: UUID,
         _ path: String,
         param: [String: AnyHashable?]? = nil,
@@ -82,7 +82,7 @@ public class Router: ObservableObject{
         }
     }
         
-    func pop(result: Any? = nil) {
+    public func pop(result: Any? = nil) {
         guard !path.isEmpty else { return }
         
         path.removeLast()
@@ -97,7 +97,7 @@ public class Router: ObservableObject{
         }
     }
     
-    func pushReplace(_ path: String) {
+    public func pushReplace(_ path: String) {
         let route = Route(path: path)
         if self.path.count == 1 {
             self.rootView = route
